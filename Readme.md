@@ -3,7 +3,9 @@ Simple anime list app using SwiftUI / Combine with the MVVM pattern.
 
 Data are fetched from an unofficial anime list API: https://jikan.docs.apiary.io/#introduction.
 
-![Anime list](Resources/home.png)
+| Anime| Charactes  | Episodes |
+| :-----: | :-: | :-: |
+| ![](Resources/home.png) | ![](Resources/chars.png) | ![](Resources/episodes.png) |
 
 Project structure:
 - Models
@@ -12,3 +14,8 @@ Project structure:
   - Details
 - Network
 
+Next up:
+- Character, episode details
+- Search
+- Dark mode support
+- Pager mechanism refacorting
