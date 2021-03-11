@@ -40,4 +40,18 @@ struct Anime: Codable {
   let start_date: String?
   let end_date: String?
   let score: Double
+  
+  
+  static func placeHolder() -> Anime {
+   return Anime(mal_id: 0,
+                rank: 0,
+                title: "",
+                url: nil,
+                image_url: nil,
+                type: nil,
+                episodes: nil,
+                start_date: nil,
+                end_date: nil, score: 0)
+  }
 }
+

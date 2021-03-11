@@ -29,6 +29,7 @@ struct AnimeListRowView: View {
         Text(anime.title)
           .font(.headline)
           .foregroundColor(.accentColor)
+          .redacted(reason: anime.title.isEmpty ? .placeholder : [])
         Text("\(anime.episodes) episode(s)")
           .font(.footnote)
           .foregroundColor(.black)
@@ -36,7 +37,6 @@ struct AnimeListRowView: View {
         Text(String(format: "Score: %.2f / 10", anime.score))
           .font(.caption)
           .foregroundColor(.secondary)
-          .redacted(reason: anime.episodes == 0 ? .placeholder : [])
       }
     }
   }

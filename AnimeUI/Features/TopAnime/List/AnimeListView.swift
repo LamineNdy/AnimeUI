@@ -13,7 +13,7 @@ struct AnimeListView: View {
   var body: some View {
     NavigationView {
       List {
-        ForEach(data.animes ?? [], id: \.mal_id) { anime in
+        ForEach(data.animes ?? Array(repeating: Anime.placeHolder(), count: 10), id: \.mal_id) { anime in
           NavigationLink(
             destination: AnimeDetailView(anime),
             label: {
@@ -21,6 +21,7 @@ struct AnimeListView: View {
             })
         }
         if data.shouldDisplayNextPage {
+          
           nextPageView
         }
       }
