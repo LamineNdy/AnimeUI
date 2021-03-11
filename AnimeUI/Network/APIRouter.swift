@@ -7,30 +7,29 @@
 
 import Foundation
 
+/* https://api.jikan.moe/v3/top/anime/1/bypopularity
+ * https://api.jikan.moe/v3/search/anime?q=Fate/Zero&page=1
+ * https://api.jikan.moe/v3/anime/1/episodes
+ * https://api.jikan.moe/v3/manga/1/characters
+*/
 enum API {
-//  https://api.jikan.moe/v3/top/anime/1/bypopularity
-// /search/anime?q=Fate/Zero&page=1
-// https://api.jikan.moe/v3/top/anime/anime/1/bypopularity
   static let scheme = "https"
   static let host = "api.jikan.moe"
   static let version = "v3"
   static let type = "anime"
-  static let top = "top"
-  static let search = "?q="
-  static let subtype = "bypopularity"
 }
 
 enum APIRouter: URLRequestConvertible {
-  case top(Int)
+  case characters(Int)
+  case episode(Int, Int)
   case search(String, Int)
+  case top(Int)
   
   // MARK: - Method
   var method: HTTPMethod {
     // We can also directly return .get as there is just one case
     switch self {
-      case .top:
-        return .get
-      case .search:
+      case .characters, .episode, .search, .top:
         return .get
     }
   }
@@ -40,10 +39,14 @@ enum APIRouter: URLRequestConvertible {
     let urlString: String = {
       let endpointBase = "\(API.scheme)://\(API.host)/\(API.version)"
       switch self {
-        case .top(let page):
-          return endpointBase + "/\(API.top)/\(API.type)/\(page)/\(API.subtype)"
+        case .characters(let id):
+        return endpointBase + "/\(API.type)/\(id)/characters_staff"
+        case .episode(let id, let page):
+          return endpointBase + "/\(API.type)/\(id)/episodes/\(page)"
         case .search(let query, let page):
-          return  endpointBase + "/\(API.type)/?q=\(query)&page=\(page)"
+          return endpointBase + "/search/\(API.type)/?q=\(query)&page=\(page)"
+        case .top(let page):
+          return endpointBase + "/top/\(API.type)/\(page)/bypopularity"
       }
     }()
     var request = URLRequest(url: try urlString.asURL())

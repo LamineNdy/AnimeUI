@@ -15,10 +15,13 @@ struct AnimeListView: View {
       List {
         ForEach(data.animes ?? [], id: \.mal_id) { anime in
           NavigationLink(
-            destination: ContentView(),
+            destination: AnimeDetailView(anime),
             label: {
               AnimeListRowView(anime: AnimeRowDetail.fromAnime(anime))
-            })        
+            })
+        }
+        if data.shouldDisplayNextPage {
+          nextPageView
         }
       }
       .navigationTitle("Top animes")

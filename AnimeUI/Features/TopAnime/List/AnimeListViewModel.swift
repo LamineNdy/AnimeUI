@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-class AnimeListViewModel: ObservableObject {
-  @Published public var animes: [Anime]?
+final class AnimeListViewModel: ObservableObject {
+  @Published var animes: [Anime]?
   
   private var cancellable: AnyCancellable?
   private(set) var totalPage: Int?
@@ -42,6 +42,7 @@ class AnimeListViewModel: ObservableObject {
         } else {
           self?.animes = animes
         }
+        self?.totalPage = animes.count / PageItemCount
       })
   }
 }

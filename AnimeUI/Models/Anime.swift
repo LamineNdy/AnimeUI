@@ -25,6 +25,10 @@ import Foundation
  ]
  */
 
+struct TopAnimes: Codable {
+  let top: [Anime]
+}
+
 struct Anime: Codable {
   let mal_id: Int
   let rank: Int

@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct AnimeRowDetail: Codable {
+struct AnimeRowDetail {
   let id: Int
   let title: String
   let url: String?
-  let image_url: String?
+  let imageUrl: String?
   let score: Double
   let episodes: Int
   
@@ -19,7 +19,7 @@ struct AnimeRowDetail: Codable {
     return AnimeRowDetail(id: anime.mal_id,
                           title: anime.title,
                           url: anime.url,
-                          image_url: anime.image_url,
+                          imageUrl: anime.image_url,
                           score: anime.score,
                           episodes: anime.episodes ?? 0)
   }
