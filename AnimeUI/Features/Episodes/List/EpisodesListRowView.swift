@@ -20,7 +20,7 @@ struct EpisodesListRowView: View {
           .redacted(reason: episode.japaneseTitle == nil ? .placeholder : [])
       }
       Spacer()
-      Text(episode.aired)
+      Text(episode.aired ?? "N/A")
         .foregroundColor(.gray)
         .font(.footnote)
     }.redacted(reason: episode.title == nil ? .placeholder : [])

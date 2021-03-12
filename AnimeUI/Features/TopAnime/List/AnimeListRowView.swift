@@ -5,8 +5,8 @@
 //  Created by Ndiaye, Lamine on 07/03/2021.
 //
 
-import SwiftUI
 import Kingfisher
+import SwiftUI
 
 struct AnimeListRowView: View {
   let anime: AnimeRowDetail
@@ -17,7 +17,7 @@ struct AnimeListRowView: View {
          let url = URL(string: image) {
         KFImage(url)
           .resizable()
-          .aspectRatio(contentMode: .fit)
+          .aspectRatio(contentMode: .fill)
           .frame(width: 80, height: 80)
           .cornerRadius(10)
       } else {

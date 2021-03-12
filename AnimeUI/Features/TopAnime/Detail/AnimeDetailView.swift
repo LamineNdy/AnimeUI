@@ -26,8 +26,8 @@ struct AnimeDetailView: View {
   var body: some View {
     VStack {
       Picker("Episode Views", selection: $selectedFlavor) {
-        ForEach(DetailViewType.allCases) { viewType in
-          Text(viewType.id).tag(viewType)
+        ForEach(DetailViewType.allCases, id: \.self) {
+          Text($0.id)
         }
       }
       .pickerStyle(SegmentedPickerStyle())

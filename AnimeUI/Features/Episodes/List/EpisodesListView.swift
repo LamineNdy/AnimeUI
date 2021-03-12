@@ -16,11 +16,12 @@ struct EpisodesListView: View {
   
   var body: some View {
     List {
-      ForEach(data.episodes ?? [], id: \.episode_id) { episode in
+      ForEach(data.episodeDetails ?? Array(repeating: EpisodeRowDetail.placeHolder(),
+                                           count: 10), id: \.id) { episode in
         NavigationLink(
-          destination: EpisodeDetailView(),
+          destination: EpisodeDetailView(episode, data.title ?? "N/A"),
           label: {
-            EpisodesListRowView(episode: EpisodeRowDetail.fromEpisode(episode))
+            EpisodesListRowView(episode: episode)
           })
       }
       if data.shouldDisplayNextPage {

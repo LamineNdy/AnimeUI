@@ -25,4 +25,8 @@ struct Character: Codable {
   var mal_id: Int
   var image_url: String?
   var name: String?
+  
+  static func placeHolder() -> Character {
+    return Character(mal_id: 1, image_url: nil, name: nil)
+  }
 }

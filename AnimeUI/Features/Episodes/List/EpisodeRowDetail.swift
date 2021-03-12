@@ -11,7 +11,7 @@ struct EpisodeRowDetail {
   let id: Int
   let title: String?
   let japaneseTitle: String?
-  let aired: String
+  let aired: String?
   
   static func fromEpisode(_ episode: Episode) -> EpisodeRowDetail {
     var airedDate = ""
@@ -29,4 +29,9 @@ struct EpisodeRowDetail {
                             japaneseTitle: episode.title_japanese,
                             aired: airedDate)
   }
+  
+  static func placeHolder() -> EpisodeRowDetail {
+    return EpisodeRowDetail(id: 1, title: nil, japaneseTitle: nil, aired: nil)
+  }
+
 }

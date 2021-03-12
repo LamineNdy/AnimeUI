@@ -9,12 +9,8 @@ import Combine
 import Foundation
 
 final class EpisodesListViewModel: ObservableObject {
-  @Published var episodes: [Episode]?
+  @Published var episodeDetails: [EpisodeRowDetail]?
   var anime: Anime
-  
-  init(_ anime: Anime) {
-    self.anime = anime
-  }
   
   private var cancellable: AnyCancellable?
   private(set) var totalPage: Int?
@@ -24,7 +20,7 @@ final class EpisodesListViewModel: ObservableObject {
   }
   
   var shouldDisplayNextPage: Bool {
-    if episodes?.isEmpty == false,
+    if episodeDetails?.isEmpty == false,
        let totalPages = totalPage,
        currentPage < totalPages {
       return true
@@ -37,6 +33,10 @@ final class EpisodesListViewModel: ObservableObject {
       fetchEpisodes()
     }
   }
+    
+  init(_ anime: Anime) {
+    self.anime = anime
+  }
   
   func fetchEpisodes(httpRequester: HTTPRequester = HttpCall()) {
     let fetchedPage = currentPage
@@ -46,10 +46,11 @@ final class EpisodesListViewModel: ObservableObject {
       .eraseToAnyPublisher()
       .receive(on: DispatchQueue.main)
       .sink(receiveValue: { [weak self] episodes in
+        let episodeDetails = episodes.map{EpisodeRowDetail.fromEpisode($0)}
         if fetchedPage > 1 {
-          self?.episodes?.append(contentsOf: episodes)
+          self?.episodeDetails?.append(contentsOf: episodeDetails)
         } else {
-          self?.episodes = episodes
+          self?.episodeDetails = episodeDetails
         }
         self?.totalPage = episodes.count / PageItemCount
       })

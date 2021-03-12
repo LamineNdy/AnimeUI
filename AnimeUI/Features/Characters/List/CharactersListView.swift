@@ -16,9 +16,10 @@ struct CharactersListView: View {
   
   var body: some View {
     List {
-      ForEach(data.characters ?? [], id: \.mal_id) { character in
+      ForEach(data.characters ?? Array(repeating: Character.placeHolder(),
+                                       count: 10), id: \.mal_id) { character in
         NavigationLink(
-          destination: CharacterDetailView(),
+          destination: CharacterDetailView(character),
           label: {
             CharactersListRowView(character: CharacterRowDetail.fromCharacter(character))
           })

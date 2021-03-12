@@ -11,6 +11,7 @@ import Foundation
  * https://api.jikan.moe/v3/search/anime?q=Fate/Zero&page=1
  * https://api.jikan.moe/v3/anime/1/episodes
  * https://api.jikan.moe/v3/manga/1/characters
+ * https://api.jikan.moe/v3/character/1/pictures
 */
 enum API {
   static let scheme = "https"
@@ -21,17 +22,14 @@ enum API {
 
 enum APIRouter: URLRequestConvertible {
   case characters(Int)
+  case charactersPictures(Int)
   case episode(Int, Int)
   case search(String, Int)
   case top(Int)
   
   // MARK: - Method
   var method: HTTPMethod {
-    // We can also directly return .get as there is just one case
-    switch self {
-      case .characters, .episode, .search, .top:
-        return .get
-    }
+    return .get
   }
   
   // MARK: - Request
@@ -41,6 +39,8 @@ enum APIRouter: URLRequestConvertible {
       switch self {
         case .characters(let id):
         return endpointBase + "/\(API.type)/\(id)/characters_staff"
+        case .charactersPictures(let id):
+          return endpointBase + "/character/\(id)/pictures"
         case .episode(let id, let page):
           return endpointBase + "/\(API.type)/\(id)/episodes/\(page)"
         case .search(let query, let page):

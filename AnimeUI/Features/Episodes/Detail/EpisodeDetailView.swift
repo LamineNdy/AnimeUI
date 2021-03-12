@@ -8,13 +8,41 @@
 import SwiftUI
 
 struct EpisodeDetailView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  let episodeDetail: EpisodeRowDetail
+  let title: String
+  
+  init(_ episodeDetail: EpisodeRowDetail, _ title: String) {
+    self.episodeDetail = episodeDetail
+    self.title = title
+  }
+  
+  var body: some View {
+    List {
+      Section(header: Text("Details")) {
+        InfoRowView(label: "Name",
+                    icon: "info",
+                    text: episodeDetail.title ?? "...")
+        InfoRowView(label: "Japanese title",
+                    icon: "message.fill",
+                    text: episodeDetail.japaneseTitle ?? "...")
+        InfoRowView(label: "Episode",
+                    icon: "livephoto.play",
+                    text: "\(episodeDetail.id)")
+        InfoRowView(label: "Air date",
+                    icon: "calendar",
+                    text: episodeDetail.aired ?? "...")
+      }.redacted(reason: episodeDetail.title  == nil ? .placeholder : [])
     }
+    .navigationTitle(title)
+    .listStyle(GroupedListStyle())
+  }
 }
 
 struct EpisodeDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        EpisodeDetailView()
-    }
+  static var previews: some View {
+    EpisodeDetailView(EpisodeRowDetail(id: 1,
+                                       title: "Some episode title",
+                                       japaneseTitle: "Japanes title",
+                                       aired: "March 2019"), "Some anime title")
+  }
 }
