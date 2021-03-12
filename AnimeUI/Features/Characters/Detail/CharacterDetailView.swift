@@ -23,6 +23,7 @@ struct CharacterDetailView: View {
     List {
       ForEach(data.pictures ?? placeHolders, id: \.id) { picPair in
         HStack {
+          Spacer()
           if let image = picPair.first.small,
              let url = URL(string: image) {
             KFImage(url)
@@ -48,6 +49,7 @@ struct CharacterDetailView: View {
               .scaledToFit()
             .foregroundColor(.gray)
           }
+          Spacer()
         }
       }
       
