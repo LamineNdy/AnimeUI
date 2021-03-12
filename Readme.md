@@ -5,7 +5,9 @@ Data are fetched from an unofficial anime list API: https://jikan.docs.apiary.io
 
 | Anime| Charactes  | Episodes |
 | :-----: | :-: | :-: |
-| ![](Resources/home.png) | ![](Resources/chars.png) | ![](Resources/episodes.png) |
+| ![](Resources/home.png) | ![](Resources/characters.png) | ![](Resources/episodes.png) |
+| :-----: | :-: | :-: |
+| ![]() | ![](Resources/character_detail.png) | ![](Resources/episode_detail.png) |
 
 Project structure:
 - Models
@@ -15,7 +17,6 @@ Project structure:
 - Network
 
 Next up:
-- Character, episode details
 - Search
 - Dark mode support
-- Pager mechanism refacorting
+- Pager mechanism refacoring
