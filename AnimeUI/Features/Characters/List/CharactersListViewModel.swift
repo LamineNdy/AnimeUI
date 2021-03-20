@@ -16,7 +16,6 @@ final class CharactersListViewModel: ObservableObject {
     self.anime = anime
   }
   
-  private var cancellable: AnyCancellable?
   private(set) var totalPage: Int?
   
   var title: String? {
@@ -25,11 +24,11 @@ final class CharactersListViewModel: ObservableObject {
   
   
   func fetchCharacters(httpRequester: HTTPRequester = HttpCall()) {
-    cancellable = httpRequester.requestResult(CharacterResult.self, APIRouter.characters(anime.mal_id))
+     httpRequester.requestResult(CharacterResult.self, APIRouter.characters(anime.mal_id))
       .map{$0.characters}
       .replaceError(with: [])
       .eraseToAnyPublisher()
       .receive(on: DispatchQueue.main)
-      .assign(to: \.characters, on: self)
+      .assign(to: &$characters)
   }
 }
